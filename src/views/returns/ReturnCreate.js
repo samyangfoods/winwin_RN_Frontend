@@ -1,11 +1,14 @@
 import { View, Text, ScrollView, Button } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { returnData } from '../../datas/ReturnData.js'
 import ReturnItem from './ReturnItem'
 
-export default function ReturnCreate() {
+export default function ReturnCreate({ navigation }) {
   const [returnProductList, setReturnProductList] = useState(returnData)
+  const [returnSumEA, setReturnSumEA] = useState(0)
+  const [returnSumPrice, setReturnSumPrice] = useState(0)
+  const [filteredReturnList, setFilteredReturnList] = useState([])
 
   const changeReturnValue = (product_sapcode, product_returnCount) => {
     const newReturnList = returnProductList.map((item) =>
@@ -14,13 +17,45 @@ export default function ReturnCreate() {
         : item
     )
     setReturnProductList(newReturnList)
-    console.log(returnProductList)
+  }
+
+  useEffect(() => {
+    const _returnSumPrice = returnProductList.reduce((acc, cur) => {
+      if (cur.product_returnCount > 0) {
+        return acc + cur.product_returnCount * cur.product_returnPrice
+      } else {
+        return acc
+      }
+    }, 0)
+    setReturnSumPrice(_returnSumPrice)
+
+    const _returnSumEA = returnProductList.reduce((acc, cur) => {
+      if (cur.product_returnCount > 0) {
+        return acc + cur.product_returnCount * 1
+      } else {
+        return acc
+      }
+    }, 0)
+    setReturnSumEA(_returnSumEA)
+  }, [returnProductList])
+
+  const returnConfirm = (e) => {
+    const submitData = returnProductList.filter(
+      (item) => item.product_returnCount > 0
+    )
+    setFilteredReturnList(submitData)
+    console.log(filteredReturnList)
   }
 
   return (
     <View>
       <View>
-        <Button title='등록하기' />
+        <Button
+          title='등록하기'
+          onPress={() => {
+            returnConfirm
+          }}
+        />
       </View>
       <ScrollView>
         <View
