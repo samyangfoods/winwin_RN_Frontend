@@ -37,49 +37,79 @@ export default function ReturnCreate({ navigation }) {
       }
     }, 0)
     setReturnSumEA(_returnSumEA)
+    console.log('FilteredReturnList', filteredReturnList)
   }, [returnProductList])
 
-  const returnConfirm = (e) => {
+  const filteredReturnData = (e) => {
     const submitData = returnProductList.filter(
       (item) => item.product_returnCount > 0
     )
     setFilteredReturnList(submitData)
-    console.log(filteredReturnList)
+    console.log('filteredReturnList', filteredReturnList)
+    console.log('Length', filteredReturnList.length)
   }
 
+  const onSubmitHandler = () => {}
+
   return (
-    <View>
-      <View>
-        <Button
-          title='등록하기'
-          onPress={() => {
-            returnConfirm
-          }}
-        />
-      </View>
-      <ScrollView>
-        <View
-          style={{
-            width: '100%',
-            flex: 1,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          {returnProductList.map((item, index) => {
-            return (
-              <ReturnItem
-                key={item.product_sapcode}
-                item={item}
-                index={index}
-                changeReturnValue={changeReturnValue}
-              />
-            )
-          })}
+    <View style={{ flex: 1 }}>
+      {filteredReturnList.length > 0 ? (
+        <View>
+          <Text>아래의 내용으로 등록하시겠습니까?</Text>
+          <View>
+            <View>
+              <Text>SUM_EA</Text>
+            </View>
+            <Text>{returnSumEA}</Text>
+          </View>
+          <View>
+            <View>
+              <Text>SUM_PRICE</Text>
+            </View>
+            <Text>{returnSumPrice}</Text>
+          </View>
+          <View style={{ positon: 'absolute', left: 0, right: 0, bottom: 0 }}>
+            <Button
+              color='#ff7d0d'
+              title='등 록 하 기'
+              onPress={() => navigation.navigate('반품 리스트')}
+            />
+          </View>
         </View>
-      </ScrollView>
+      ) : (
+        <View style={{ flex: 1 }}>
+          <ScrollView>
+            <View
+              style={{
+                width: '100%',
+                flex: 1,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {returnProductList.map((item, index) => {
+                return (
+                  <ReturnItem
+                    key={item.product_sapcode}
+                    item={item}
+                    index={index}
+                    changeReturnValue={changeReturnValue}
+                  />
+                )
+              })}
+            </View>
+          </ScrollView>
+          <View style={{ marginBottom: 0, left: 0, right: 0 }}>
+            <Button
+              color='#ff7d0d'
+              title='다       음'
+              onPress={filteredReturnData}
+            />
+          </View>
+        </View>
+      )}
     </View>
   )
 }

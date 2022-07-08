@@ -84,7 +84,7 @@ export default function ReturnItem({
   }
 
   const activeInputStyle = {
-    borderColor: !isFocused ? '#aaa' : '#006aff',
+    borderColor: !isFocused ? '#aaa' : '#ff7d0d',
   }
 
   // '#ff7d0d'
