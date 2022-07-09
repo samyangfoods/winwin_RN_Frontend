@@ -47,9 +47,6 @@ export default function ReturnCreate({ navigation }) {
     setFilteredReturnList(submitData)
   }
 
-  const onSubmitHandler = () => {}
-
-  console.log('filteredReturnList', filteredReturnList)
   return (
     <View style={{ flex: 1 }}>
       {filteredReturnList.length > 0 ? (
