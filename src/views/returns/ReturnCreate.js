@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 
 import { returnData } from '../../datas/ReturnData.js'
 import ReturnItem from './ReturnItem'
+import ReturnConfirm from './ReturnConfirm.js'
 
 export default function ReturnCreate({ navigation }) {
   const [returnProductList, setReturnProductList] = useState(returnData)
@@ -37,7 +38,6 @@ export default function ReturnCreate({ navigation }) {
       }
     }, 0)
     setReturnSumEA(_returnSumEA)
-    console.log('FilteredReturnList', filteredReturnList)
   }, [returnProductList])
 
   const filteredReturnData = (e) => {
@@ -45,37 +45,19 @@ export default function ReturnCreate({ navigation }) {
       (item) => item.product_returnCount > 0
     )
     setFilteredReturnList(submitData)
-    console.log('filteredReturnList', filteredReturnList)
-    console.log('Length', filteredReturnList.length)
   }
 
   const onSubmitHandler = () => {}
 
+  console.log('filteredReturnList', filteredReturnList)
   return (
     <View style={{ flex: 1 }}>
       {filteredReturnList.length > 0 ? (
-        <View>
-          <Text>아래의 내용으로 등록하시겠습니까?</Text>
-          <View>
-            <View>
-              <Text>SUM_EA</Text>
-            </View>
-            <Text>{returnSumEA}</Text>
-          </View>
-          <View>
-            <View>
-              <Text>SUM_PRICE</Text>
-            </View>
-            <Text>{returnSumPrice}</Text>
-          </View>
-          <View style={{ positon: 'absolute', left: 0, right: 0, bottom: 0 }}>
-            <Button
-              color='#ff7d0d'
-              title='등 록 하 기'
-              onPress={() => navigation.navigate('반품 리스트')}
-            />
-          </View>
-        </View>
+        <ReturnConfirm
+          returnSumEA={returnSumEA}
+          returnSumPrice={returnSumPrice}
+          filteredReturnList={filteredReturnList}
+        />
       ) : (
         <View style={{ flex: 1 }}>
           <ScrollView>
