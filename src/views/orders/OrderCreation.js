@@ -14,9 +14,6 @@ const OrderList = ({ navigation }) => {
   const [orderItems, setOrderItems] = useState(productData);
   const [selectedItems, setSelectedItems] = useState([]);
 
-  console.log("1=====================");
-  console.log("✨ Selected Array: ", selectedItems);
-
   return (
     <OrderCreationContainer
       contentContainerStyle={{
@@ -43,7 +40,11 @@ const OrderList = ({ navigation }) => {
               />
             ))}
           </View>
-          <OrderCreationButton>
+          <OrderCreationButton
+            onPress={() =>
+              navigation.navigate("주문상세", { orderData: [selectedItems] })
+            }
+          >
             <Text style={{ color: "white" }}>주문하기</Text>
           </OrderCreationButton>
         </View>

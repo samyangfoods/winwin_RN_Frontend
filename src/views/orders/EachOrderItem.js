@@ -17,8 +17,7 @@ const EachOrderItem = ({ item, setSelectedItems, selectedItems }) => {
     if (selectedItems.length != 0) {
       selectedItems.map(async (data) => {
         if (data.product_name == product_name) {
-          const copiedArray = selectedItems;
-          const filteredArray = await copiedArray.filter(
+          const filteredArray = await selectedItems.filter(
             (item) => item.product_name != product_name
           );
 
