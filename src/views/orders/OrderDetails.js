@@ -5,7 +5,7 @@ import { HorizontalDiv } from "../../styles/Auth";
 import { Text } from "../../styles/Style";
 
 const OrderDetails = ({ route }) => {
-  const [orderData, setOrderData] = useState(route.params.orderData[0]);
+  const orderData = route.params.orderData[0];
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
 
