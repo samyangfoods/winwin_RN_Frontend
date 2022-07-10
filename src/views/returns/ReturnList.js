@@ -68,7 +68,7 @@ export default function ReturnList({ navigation }) {
         <View style={styles.container}>
           {returnValueDummyData.map((item) => {
             return (
-              <View style={styles.returnListContainer} key={item.no}>
+              <View style={styles.returnListContainer} key={item.gunnyNumber}>
                 <View style={styles.returnItemContainer}>
                   <TouchableOpacity>
                     <View style={styles.gunnyNumber}>
