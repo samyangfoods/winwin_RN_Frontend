@@ -8,10 +8,11 @@ const EachOrderItem = ({ item, setSelectedItems, selectedItems }) => {
   const [quantity, setQuantity] = useState("");
 
   const handleItemQuantity = () => {
-    const { product_name } = item;
+    const { product_name, product_price } = item;
     const productInfo = {
       product_name,
       quantity,
+      product_price,
     };
 
     if (selectedItems.length != 0) {
