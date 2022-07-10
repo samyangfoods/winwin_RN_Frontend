@@ -12,6 +12,10 @@ import {
 const OrderList = ({ navigation }) => {
   // State Variables
   const [orderItems, setOrderItems] = useState(productData);
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  console.log("1=====================");
+  console.log("✨ Selected Array: ", selectedItems);
 
   return (
     <OrderCreationContainer
@@ -31,7 +35,12 @@ const OrderList = ({ navigation }) => {
             }}
           >
             {orderItems.map((product) => (
-              <EachOrderItem item={product} />
+              <EachOrderItem
+                key={product.product_id}
+                item={product}
+                setSelectedItems={setSelectedItems}
+                selectedItems={selectedItems}
+              />
             ))}
           </View>
           <OrderCreationButton>
