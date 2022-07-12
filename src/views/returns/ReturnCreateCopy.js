@@ -45,45 +45,50 @@ export default function ReturnCreate({ navigation }) {
       (item) => item.product_returnCount > 0
     );
     setFilteredReturnList(submitData);
-    navigation.navigate("반품확인", {
-      filteredReturnData,
-      returnSumEA,
-      returnSumPrice,
-    });
   };
 
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView>
-        <View
-          style={{
-            width: "100%",
-            flex: 1,
-            flexDirection: "row",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {returnProductList.map((item, index) => {
-            return (
-              <ReturnItem
-                key={item.product_sapcode}
-                item={item}
-                index={index}
-                changeReturnValue={changeReturnValue}
-              />
-            );
-          })}
-        </View>
-      </ScrollView>
-      <View style={{ marginBottom: 0, left: 0, right: 0 }}>
-        <Button
-          color="#ff7d0d"
-          title="다       음"
-          onPress={filteredReturnData}
+      {filteredReturnList.length > 0 ? (
+        <ReturnConfirm
+          returnSumEA={returnSumEA}
+          returnSumPrice={returnSumPrice}
+          filteredReturnList={filteredReturnList}
         />
-      </View>
+      ) : (
+        <View style={{ flex: 1 }}>
+          <ScrollView>
+            <View
+              style={{
+                width: "100%",
+                flex: 1,
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {returnProductList.map((item, index) => {
+                return (
+                  <ReturnItem
+                    key={item.product_sapcode}
+                    item={item}
+                    index={index}
+                    changeReturnValue={changeReturnValue}
+                  />
+                );
+              })}
+            </View>
+          </ScrollView>
+          <View style={{ marginBottom: 0, left: 0, right: 0 }}>
+            <Button
+              color="#ff7d0d"
+              title="다       음"
+              onPress={filteredReturnData}
+            />
+          </View>
+        </View>
+      )}
     </View>
   );
 }
