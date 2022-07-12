@@ -1,5 +1,8 @@
 import { View, Text, ScrollView, Button, StyleSheet } from 'react-native'
 import React from 'react'
+import marketSlice from '../../redux/slices/market'
+import returnSlice from '../../redux/slices/return'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function ReturnConfirm({
   navigation,
