@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { productData } from "../../datas/ProductData";
-import { SectionList, View } from "react-native";
 import EachOrderItem from "./EachOrderItem";
+import { productData } from "../../datas/ProductData";
+import { View } from "react-native";
 import { Text } from "../../styles/Style";
-import {
-  OrderCreationButton,
-  OrderCreationContainer,
-} from "../../styles/orders/Orders";
 import { SectionGrid } from "react-native-super-grid";
+import {
+  OrderCreationContainer,
+  OrderCreationButton,
+} from "../../styles/orders/Orders";
 
 const OrderList = ({ navigation }) => {
   // State Variables
   const [orderItems, setOrderItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
 
+  // useEffect will arrange product data into specific sections
   useEffect(() => {
     let newReleased = [];
     let plate = [];
@@ -66,6 +67,7 @@ const OrderList = ({ navigation }) => {
     setOrderItems(sampleArray);
   }, []);
 
+  // Handling functions
   const renderEachOrderItem = ({ item }) => {
     return (
       <EachOrderItem
@@ -77,7 +79,7 @@ const OrderList = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: "center" }}>
+    <OrderCreationContainer>
       <SectionGrid
         itemDimension={100}
         sections={orderItems}
@@ -95,7 +97,7 @@ const OrderList = ({ navigation }) => {
       >
         <Text style={{ color: "white" }}>주문하기</Text>
       </OrderCreationButton>
-    </View>
+    </OrderCreationContainer>
   );
 };
 

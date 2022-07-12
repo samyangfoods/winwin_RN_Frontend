@@ -1,11 +1,13 @@
 import styled from "styled-components/native";
 import { LoginBtn } from "../Auth";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // OrderList
 
 // OrderCreation
-export const OrderCreationContainer = styled(KeyboardAwareScrollView)``;
+export const OrderCreationContainer = styled.View`
+  flex: 1;
+  align-items: center;
+`;
 
 export const OrderCreationButton = styled(LoginBtn)`
   margin-bottom: 5%;
