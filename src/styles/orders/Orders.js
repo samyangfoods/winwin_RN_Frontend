@@ -29,3 +29,13 @@ export const EachOrderItemTextInput = styled.TextInput`
   margin: 2% 3%;
   font-size: 10px;
 `;
+
+export const InfoContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 40px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  margin-left: 5%;
+`;

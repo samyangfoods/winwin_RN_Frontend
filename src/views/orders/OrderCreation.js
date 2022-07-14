@@ -5,8 +5,8 @@ import { View } from "react-native";
 import { Text } from "../../styles/Style";
 import { SectionGrid } from "react-native-super-grid";
 import {
-  OrderCreationContainer,
   OrderCreationButton,
+  OrderCreationContainer,
 } from "../../styles/orders/Orders";
 
 const OrderList = ({ navigation }) => {
@@ -71,6 +71,7 @@ const OrderList = ({ navigation }) => {
   const renderEachOrderItem = ({ item }) => {
     return (
       <EachOrderItem
+        key={item.product_id}
         item={item}
         setSelectedItems={setSelectedItems}
         selectedItems={selectedItems}
@@ -90,6 +91,7 @@ const OrderList = ({ navigation }) => {
           </View>
         )}
       />
+
       <OrderCreationButton
         onPress={() =>
           navigation.navigate("주문상세", { orderData: [selectedItems] })

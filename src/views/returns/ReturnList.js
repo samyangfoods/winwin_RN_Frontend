@@ -55,7 +55,7 @@ export default function ReturnList({ navigation }) {
 
       <OARScrollView>
         {returnValueDummyData.map((item) => (
-          <OrderAndReturnListItem item={item} />
+          <OrderAndReturnListItem key={item.gunnyNumber} item={item} />
         ))}
       </OARScrollView>
 

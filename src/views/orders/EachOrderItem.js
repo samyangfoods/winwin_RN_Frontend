@@ -8,6 +8,8 @@ const EachOrderItem = ({ item, setSelectedItems, selectedItems }) => {
   const [quantity, setQuantity] = useState("");
 
   const handleItemQuantity = () => {
+    if (quantity == "") return;
+
     const { product_name, product_price } = item;
     const productInfo = {
       product_name,
@@ -39,6 +41,7 @@ const EachOrderItem = ({ item, setSelectedItems, selectedItems }) => {
         keyboardType="numeric"
         onChangeText={(text) => setQuantity(text)}
         onSubmitEditing={handleItemQuantity}
+        onBlur={handleItemQuantity}
       />
     </EachOrderItemContainer>
   );

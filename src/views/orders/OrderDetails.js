@@ -1,14 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import NotFound from "../../components/NotFound";
-import { HorizontalDiv } from "../../styles/Auth";
 import { Text } from "../../styles/Style";
+import {
+  InfoContainer,
+  OrderCreationButton,
+  OrderCreationContainer,
+} from "../../styles/orders/Orders";
+import { HorizontalDiv } from "../../styles/Auth";
+import { StyledPicker } from "../../styles/Component";
+import Calendar from "../../components/Calendar";
+import DetailInfoList from "../../components/orderAndreturns/DetailInfoList";
 
 const OrderDetails = ({ route }) => {
-  const orderData = route.params.orderData[0];
+  // State Variables
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const [locationAddress, setLocationAddress] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState({
+    label: "창고",
+    value: 1,
+  });
+  const [selectedDelivery, setSelectedDelivery] = useState({
+    label: "오전배송",
+    value: 1,
+  });
+  const [deliveryDate, setDeliveryDate] = useState(new Date());
 
+  // Variables
+  const orderData = route.params.orderData[0];
+  const locationCategory = [
+    { label: "창고", value: 1 },
+    { label: "서한종합유통", value: 2 },
+    { label: "우리식자재마트", value: 3 },
+  ];
+  const deliveryCategory = [
+    { label: "오전배송", value: 1 },
+    { label: "오후배송", value: 2 },
+  ];
+
+  // useEffect setting: total price and product quantity
   useEffect(() => {
     const calculateTotalPrice = async () => {
       let temp = 0;
@@ -19,7 +50,7 @@ const OrderDetails = ({ route }) => {
         });
       }
 
-      setTotalPrice(temp);
+      await setTotalPrice(temp);
     };
 
     const calculateTotalQuantity = async () => {
@@ -30,37 +61,110 @@ const OrderDetails = ({ route }) => {
           temp += parseInt(quantity);
         });
       }
-      setTotalQuantity(temp);
+      await setTotalQuantity(temp);
     };
 
     calculateTotalPrice();
     calculateTotalQuantity();
   }, []);
 
+  // Location address init
+  useEffect(() => {
+    const setMarketInfo = async (location) => {
+      switch (location) {
+        case "창고":
+          setLocationAddress("창고 주소");
+          return;
+        case "서한종합유통":
+          setLocationAddress("서한종합유통 주소");
+          return;
+        case "우리식자재마트":
+          setLocationAddress("우리식자재마트 주소");
+          return;
+      }
+    };
+
+    if (selectedLocation) setMarketInfo(selectedLocation.label);
+  }, [selectedLocation]);
+
+  // Handling Functions
+  const handleLocation = (text) => {
+    setSelectedLocation(text.label);
+
+    switch (text.label) {
+      case "창고":
+        setLocationAddress("창고 주소");
+        return;
+      case "서한종합유통":
+        setLocationAddress("서한종합유통 주소");
+        return;
+      case "우리식자재마트":
+        setLocationAddress("우리식자재마트 주소");
+        return;
+    }
+  };
+  const handleDelivery = (text) => {
+    setSelectedDelivery(text.label);
+  };
+
   return (
-    <View>
-      <HorizontalDiv>
-        <Text>제품명</Text>
-        <Text>수량</Text>
-        <Text>가격</Text>
+    <OrderCreationContainer>
+      <View style={{ marginBottom: 20 }}>
+        <HorizontalDiv style={{ marginTop: 20 }}>
+          <StyledPicker
+            style={{ width: 150, height: 40 }}
+            item={selectedLocation}
+            items={locationCategory}
+            onItemChange={(text) => handleLocation(text)}
+            title="배송 장소"
+            placeholder="배송 장소를 선택하세요"
+            textInputStyle={{ textAlign: "center" }}
+          />
+          <InfoContainer>
+            <Text>{locationAddress}</Text>
+          </InfoContainer>
+        </HorizontalDiv>
+
+        <HorizontalDiv style={{ marginTop: 20 }}>
+          <StyledPicker
+            style={{ width: 150, height: 40 }}
+            item={selectedDelivery}
+            items={deliveryCategory}
+            onItemChange={(text) => handleDelivery(text)}
+            title="배송 시간"
+            placeholder="배송 시간을 선택하세요"
+            textInputStyle={{ textAlign: "center" }}
+          />
+          <InfoContainer>
+            <Calendar date={deliveryDate} setDate={setDeliveryDate} />
+          </InfoContainer>
+        </HorizontalDiv>
+      </View>
+
+      <DetailInfoList
+        orderData={orderData}
+        totalPrice={totalPrice}
+        totalQuantity={totalQuantity}
+      />
+
+      <HorizontalDiv style={{ marginTop: 15, justifyContent: "center" }}>
+        <Text style={{ fontSize: 17, textAlign: "center" }}>
+          위의 내역을 등록하시겠습니까?
+        </Text>
       </HorizontalDiv>
-      {orderData ? (
-        orderData.map((data) => (
-          <HorizontalDiv>
-            <Text>{data.product_name}</Text>
-            <Text>{data.quantity}</Text>
-            <Text>{data.quantity * data.product_price}</Text>
-          </HorizontalDiv>
-        ))
-      ) : (
-        <NotFound />
-      )}
-      <HorizontalDiv>
-        <Text>합계</Text>
-        <Text>{totalQuantity} 박스</Text>
-        <Text>{totalPrice}</Text>
-      </HorizontalDiv>
-    </View>
+
+      <OrderCreationButton
+        onPress={() => {
+          console.log("==========================================");
+          console.log(orderData);
+          console.log(selectedDelivery.label);
+          console.log(deliveryDate);
+          console.log("==========================================");
+        }}
+      >
+        <Text style={{ color: "white" }}>주문하기</Text>
+      </OrderCreationButton>
+    </OrderCreationContainer>
   );
 };
 
