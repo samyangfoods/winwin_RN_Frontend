@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import NotFound from "../../components/NotFound";
+import { View } from "react-native";
 import { Text } from "../../styles/Style";
 import {
   InfoContainer,
@@ -11,6 +10,8 @@ import { HorizontalDiv } from "../../styles/Auth";
 import { StyledPicker } from "../../styles/Component";
 import Calendar from "../../components/Calendar";
 import DetailInfoList from "../../components/orderAndreturns/DetailInfoList";
+import { useOrderCreation } from "../../hooks/orderHooks";
+import { useSelector } from "react-redux";
 
 const OrderDetails = ({ route }) => {
   // State Variables
@@ -26,6 +27,9 @@ const OrderDetails = ({ route }) => {
     value: 1,
   });
   const [deliveryDate, setDeliveryDate] = useState(new Date());
+
+  // Redux Variable
+  const token = useSelector((state) => state.user.token);
 
   // Variables
   const orderData = route.params.orderData[0];
@@ -154,13 +158,14 @@ const OrderDetails = ({ route }) => {
       </HorizontalDiv>
 
       <OrderCreationButton
-        onPress={() => {
-          console.log("==========================================");
-          console.log(orderData);
-          console.log(selectedDelivery.label);
-          console.log(deliveryDate);
-          console.log("==========================================");
-        }}
+        onPress={useOrderCreation(
+          token,
+          selectedLocation,
+          locationAddress,
+          deliveryDate,
+          selectedDelivery,
+          orderData
+        )}
       >
         <Text style={{ color: "white" }}>주문하기</Text>
       </OrderCreationButton>

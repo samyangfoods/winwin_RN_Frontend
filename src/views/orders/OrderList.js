@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import Constant from "expo-constants";
 import OrderAndReturnListItem from "../../components/OrderAndReturnListItem";
@@ -7,6 +7,7 @@ import { OARScrollView } from "../../styles/OrderAndReturn";
 import { MainContainer, PlusBtn } from "../../styles/Lounge";
 
 const OrderList = ({ navigation }) => {
+  // Variables
   const returnValueDummyData = [
     {
       gunnyNumber: 1,
@@ -44,10 +45,22 @@ const OrderList = ({ navigation }) => {
     },
   ];
 
+  // UseEffect to set order list
+  useEffect(() => {
+    const requestOrderList = async () => {
+      const response = await useOrderList();
+
+      console.log(response);
+    };
+
+    requestOrderList();
+  }, []);
+
   return (
     <MainContainer
       style={{
         marginTop: Constant.statusBarHeight,
+        // marginTop: 10,
       }}
     >
       <Header />
