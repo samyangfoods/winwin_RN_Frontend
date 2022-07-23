@@ -158,14 +158,16 @@ const OrderDetails = ({ route }) => {
       </HorizontalDiv>
 
       <OrderCreationButton
-        onPress={useOrderCreation(
-          token,
-          selectedLocation,
-          locationAddress,
-          deliveryDate,
-          selectedDelivery,
-          orderData
-        )}
+        onPress={() =>
+          useOrderCreation(
+            token,
+            selectedLocation,
+            locationAddress,
+            deliveryDate,
+            selectedDelivery,
+            orderData
+          )
+        }
       >
         <Text style={{ color: "white" }}>주문하기</Text>
       </OrderCreationButton>
