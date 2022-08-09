@@ -110,6 +110,18 @@ const OrderDetails = ({ route }) => {
   const handleDelivery = (text) => {
     setSelectedDelivery(text.label);
   };
+  const processOrder = async () => {
+    const data = await useOrderCreation(
+      token,
+      selectedLocation,
+      locationAddress,
+      deliveryDate,
+      selectedDelivery,
+      orderData
+    );
+
+    console.log(data);
+  };
 
   return (
     <OrderCreationContainer>
@@ -157,18 +169,7 @@ const OrderDetails = ({ route }) => {
         </Text>
       </HorizontalDiv>
 
-      <OrderCreationButton
-        onPress={() =>
-          useOrderCreation(
-            token,
-            selectedLocation,
-            locationAddress,
-            deliveryDate,
-            selectedDelivery,
-            orderData
-          )
-        }
-      >
+      <OrderCreationButton onPress={() => processOrder()}>
         <Text style={{ color: "white" }}>주문하기</Text>
       </OrderCreationButton>
     </OrderCreationContainer>
