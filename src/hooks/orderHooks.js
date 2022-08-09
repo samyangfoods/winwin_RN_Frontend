@@ -1,4 +1,5 @@
 import axios from "axios";
+import { basicApiUrl } from "./urlSetting";
 
 export const useOrderCreation = async (
   token,
@@ -29,7 +30,7 @@ export const useOrderCreation = async (
   return data;
 };
 
-export const useOrderList = async () => {
+export const useOrderList = async (token) => {
   const { data } = await axios.get(`${basicApiUrl}/order`, {
     headers: { authorization: `Bearer ${token}` },
   });
