@@ -14,7 +14,7 @@ const OrderList = ({ navigation }) => {
   const [orderItems, setOrderItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
 
-  // useEffect will arrange product data into specific sections
+  // This useEffect will arrange product data into specific sections
   useEffect(() => {
     let newReleased = [];
     let plate = [];
