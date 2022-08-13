@@ -113,14 +113,14 @@ const OrderDetails = ({ route }) => {
   const processOrder = async () => {
     const data = await useOrderCreation(
       token,
-      selectedLocation,
+      selectedLocation.label,
       locationAddress,
       deliveryDate,
-      selectedDelivery,
+      selectedDelivery.label,
       orderData
     );
 
-    console.log(data);
+    console.log("🔥", data);
   };
 
   return (
