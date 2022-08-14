@@ -96,6 +96,10 @@ const OrderList = ({ navigation }) => {
         onPress={() =>
           navigation.navigate("주문상세", { orderData: [selectedItems] })
         }
+        disabled={selectedItems.length == 0 ? true : false}
+        style={{
+          backgroundColor: selectedItems.length != 0 ? "#ff7d0d" : "#aaa",
+        }}
       >
         <Text style={{ color: "white" }}>주문하기</Text>
       </OrderCreationButton>

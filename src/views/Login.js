@@ -81,7 +81,6 @@ const Login = ({ navigation }) => {
       } catch (error) {
         console.log("error", error);
       } finally {
-        // setTimeout(async () => await SplashScreen.hideAsync(), 350);
         await SplashScreen.hideAsync();
       }
     };
@@ -164,7 +163,7 @@ const Login = ({ navigation }) => {
         />
         <PasswordContainer>
           <Input
-            placeholderTextColor="#000" 
+            placeholderTextColor="#000"
             placeholder="비밀번호"
             secureTextEntry={showing}
             onChangeText={(text) => handlePassword(text)}
