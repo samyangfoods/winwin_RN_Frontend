@@ -20,8 +20,8 @@ const Nav = createNativeStackNavigator();
 
 const Root = () => (
   <Nav.Navigator screenOptions={{ headerShown: false }}>
-    <Nav.Screen name="Stack" component={Stack} />
     <Nav.Screen name="Modal" component={Modal} />
+    <Nav.Screen name="Stack" component={Stack} />
     <Nav.Screen
       name="행사등록"
       component={PromotionCreate}

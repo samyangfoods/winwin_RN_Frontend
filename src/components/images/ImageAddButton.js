@@ -11,7 +11,7 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 import { Text } from "../../styles/Style";
-import { imageW140 } from "../../hooks/urlSetting";
+import { imageW140 } from "../../secrets/urlSetting";
 
 const ImageAddButton = ({ index, image, accessAlbum, deleteImage }) => {
   return (

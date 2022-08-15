@@ -11,7 +11,7 @@ import {
   usePromotions,
   usePromotionUpdate,
 } from "../../hooks/promotionHooks";
-import { imageW600 } from "../../hooks/urlSetting";
+import { imageW600 } from "../../secrets/urlSetting";
 import promotionSlice from "../../redux/slices/Promotion";
 import {
   PromotionDetailContainer,
@@ -84,9 +84,6 @@ const PromotionDetail = ({ route, navigation }) => {
 
       if (result) {
         Alert.alert("알림", "행사 정보가 변경되었습니다.");
-
-        console.log("✅ PromotionDetail, Result:", result);
-
         navigation.goBack();
       } else {
         Alert.alert("알림", "오류 발생");

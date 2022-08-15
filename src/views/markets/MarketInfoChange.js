@@ -20,7 +20,7 @@ import {
 } from "../../hooks/marketHooks";
 import { ActivityIndicator, Alert } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { imageW600 } from "../../hooks/urlSetting";
+import { imageW600 } from "../../secrets/urlSetting";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import marketSlice from "../../redux/slices/market";
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { basicApiUrl } from "./urlSetting";
+import { basicApiUrl } from "../secrets/urlSetting";
 
 export const useSearch = async (
   promotionArray,

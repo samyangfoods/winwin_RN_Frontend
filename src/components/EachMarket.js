@@ -1,5 +1,5 @@
 import React from "react";
-import { imageW140 } from "../hooks/urlSetting";
+import { imageW140 } from "../secrets/urlSetting";
 import {
   RouteBtn,
   MapContainer,

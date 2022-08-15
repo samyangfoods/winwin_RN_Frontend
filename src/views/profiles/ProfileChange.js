@@ -31,7 +31,7 @@ import {
   VerticalDiv,
 } from "../../styles/profiles/UserProfileChange";
 import Channel from "../../components/Channel";
-import { imageW140 } from "../../hooks/urlSetting";
+import { imageW140 } from "../../secrets/urlSetting";
 import userSlice from "../../redux/slices/user";
 
 const UserInfo = ({ navigation, route }) => {
