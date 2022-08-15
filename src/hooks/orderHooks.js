@@ -63,7 +63,7 @@ export const useOrderUpdateById = async (
   return data;
 };
 
-export const useOrderRemovalById = async (token, orderId) => {
+export const userOrderRemovalById = async (token, orderId) => {
   const { data } = await axios.delete(`${basicApiUrl}/order/${orderId}`, {
     headers: { authorization: `Bearer ${token}` },
   });

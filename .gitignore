@@ -125,5 +125,10 @@ dist/
 # @end expo-cli
 .env
 
+<<<<<<< HEAD
+# secrets
+src/secrets
+=======
 # secret
 src/secrets/
+>>>>>>> 412933d7e3c0d301d25cd13a861c0419997e12ef
