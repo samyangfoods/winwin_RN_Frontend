@@ -25,6 +25,7 @@ const OrderList = ({ navigation }) => {
     };
 
     requestOrderList();
+    console.log("Hello");
   }, []);
 
   return (
@@ -37,7 +38,11 @@ const OrderList = ({ navigation }) => {
 
       <OARScrollView>
         {orderList?.map((item) => (
-          <OrderAndReturnListItem key={item.gunnyNumber} item={item} />
+          <OrderAndReturnListItem
+            key={item._id}
+            item={item}
+            setOrderList={setOrderList}
+          />
         ))}
       </OARScrollView>
 

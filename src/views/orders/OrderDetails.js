@@ -111,24 +111,17 @@ const OrderDetails = ({ route }) => {
     setSelectedDelivery(text.label);
   };
   const processOrder = async () => {
-    // console.log("✅✅✅✅✅✅");
-    // console.log(selectedLocation.label);
-    // console.log(locationAddress);
-    // console.log(deliveryDate);
-    // console.log(selectedDelivery.label);
-    // console.log(orderData);
-    // console.log("✅✅✅✅✅✅");
-
     try {
       const orderObj = {
         deliveryPlace: selectedLocation.label,
         deliveryAddress: locationAddress,
-        deliveryDate,
+        deliveryDate: JSON.stringify(deliveryDate),
         deliveryTime: selectedDelivery.label,
-        orderDetail: orderData,
+        orderDetail: JSON.stringify(orderData),
       };
+
       const data = await useOrderCreation(token, orderObj);
-      console.log("🔥 data is returned", data);
+      console.log("🔥 Order is completed: ", data);
     } catch (error) {
       console.log(error);
     }
