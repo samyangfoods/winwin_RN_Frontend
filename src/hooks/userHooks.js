@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
-import { basicApiUrl } from "./urlSetting";
+import { basicApiUrl } from "../secrets/urlSetting";
 
 export const useLogin = async (userId, password) => {
   try {

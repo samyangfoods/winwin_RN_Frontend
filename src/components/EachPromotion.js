@@ -21,7 +21,7 @@ import {
   useExpirationValidation,
   usePromotionDuration,
 } from "../hooks/util";
-import { imageW140 } from "../hooks/urlSetting";
+import { imageW140 } from "../secrets/urlSetting";
 
 const Promotion = ({ item, navigation }) => {
   const endDate = useDateFormat(item.end_date);

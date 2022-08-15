@@ -111,16 +111,29 @@ const OrderDetails = ({ route }) => {
     setSelectedDelivery(text.label);
   };
   const processOrder = async () => {
-    const data = await useOrderCreation(
-      token,
-      selectedLocation.label,
-      locationAddress,
-      deliveryDate,
-      selectedDelivery.label,
-      orderData
-    );
+    // console.log("✅✅✅✅✅✅");
+    // console.log(selectedLocation.label);
+    // console.log(locationAddress);
+    // console.log(deliveryDate);
+    // console.log(selectedDelivery.label);
+    // console.log(orderData);
+    // console.log("✅✅✅✅✅✅");
 
-    console.log("🔥", data);
+    try {
+      const orderObj = {
+        deliveryPlace: selectedLocation.label,
+        deliveryAddress: locationAddress,
+        deliveryDate,
+        deliveryTime: selectedDelivery.label,
+        orderDetail: orderData,
+      };
+      const data = await useOrderCreation(token, orderObj);
+      console.log("🔥 data is returned", data);
+    } catch (error) {
+      console.log(error);
+    }
+
+    //TODO: 주문이 성공하면 Alert 띄우기
   };
 
   return (

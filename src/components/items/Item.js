@@ -18,8 +18,6 @@ const Item = ({ data, category }) => {
   );
   const [prValue, setPrValue] = useState("" || data.prValue.toString());
 
-  console.log(data);
-
   // Handling Functions
   const handleName = (selectedCategory) => {
     data.productName = selectedCategory.label;

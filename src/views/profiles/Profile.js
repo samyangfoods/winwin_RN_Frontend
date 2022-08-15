@@ -21,7 +21,7 @@ import {
   HorizontalSeparator,
 } from "../../styles/profiles/UserProfile";
 import DataLoading from "../../components/DataLoading";
-import { imageW140 } from "../../hooks/urlSetting";
+import { imageW140 } from "../../secrets/urlSetting";
 import { BasicTouchableOpacity } from "../../styles/Style";
 
 const Profile = ({ navigation }) => {

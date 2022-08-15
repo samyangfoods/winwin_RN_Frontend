@@ -1,27 +1,32 @@
 import axios from "axios";
-import { basicApiUrl } from "./urlSetting";
+import { basicApiUrl } from "../secrets/urlSetting";
 
-export const useOrderCreation = async (
-  token,
-  deliveryPlace,
-  deliveryAddress,
-  deliveryDate,
-  deliveryTime,
-  orderDetail
-) => {
+export const useOrderCreation = async (token, orderObj) => {
+  const {
+    deliveryPlace,
+    deliveryAddress,
+    deliveryDate,
+    deliveryTime,
+    orderDetail,
+  } = orderObj;
+
   const formData = new FormData();
 
   formData.append("deliveryPlace", deliveryPlace);
   formData.append("deliveryAddress", deliveryAddress);
-  formData.append("deliveryDate", JSON.stringify(deliveryDate));
+  // formData.append("deliveryDate", JSON.stringify(deliveryDate));
+  formData.append("deliveryDate", "2022-01-01");
   formData.append("deliveryTime", deliveryTime);
-  formData.append("orderDetail", JSON.stringify(orderDetail));
+  // formData.append("orderDetail", JSON.stringify(orderDetail));
+  formData.append("orderDetail", "Hello");
 
-  console.log("🔥", formData);
+  console.log("🔥 FormData created: ", formData);
 
   const { data } = await axios.post(`${basicApiUrl}/order`, formData, {
     headers: { authorization: `Bearer ${token}` },
   });
+
+  // console.log("🔥 response: ", data);
 
   return data;
 };
@@ -31,7 +36,7 @@ export const useOrderList = async (token) => {
     headers: { authorization: `Bearer ${token}` },
   });
 
-  return data;
+  return data.myOrders;
 };
 
 export const useOrderItem = async () => {

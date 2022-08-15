@@ -7,6 +7,7 @@ import { OARScrollView } from "../../styles/OrderAndReturn";
 import { MainContainer, PlusBtn } from "../../styles/Lounge";
 import { useOrderList } from "../../hooks/orderHooks";
 import { useSelector } from "react-redux";
+import NotFound from "../../components/NotFound";
 
 const OrderList = ({ navigation }) => {
   // State Variables
@@ -35,7 +36,7 @@ const OrderList = ({ navigation }) => {
       <Header />
 
       <OARScrollView>
-        {orderList.map((item) => (
+        {orderList?.map((item) => (
           <OrderAndReturnListItem key={item.gunnyNumber} item={item} />
         ))}
       </OARScrollView>
