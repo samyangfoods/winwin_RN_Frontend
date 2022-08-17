@@ -76,15 +76,23 @@ const PromotionDetail = ({ route, navigation }) => {
       start_date: dateStart.toString(),
       end_date: dateEnd.toString(),
       promotionDetail: item,
-      promotionType,
+      promotionType: promotionType.label,
     };
 
     try {
       const result = await usePromotionUpdate(token, promotionObj, data._id);
 
       if (result) {
-        Alert.alert("알림", "행사 정보가 변경되었습니다.");
-        navigation.goBack();
+        const promotionData = await usePromotions(token);
+        if (promotionData) {
+          dispatch(
+            promotionSlice.actions.setPromotion({
+              array: [...promotionData],
+            })
+          );
+          Alert.alert("알림", "행사 정보가 변경되었습니다.");
+          navigation.goBack();
+        }
       } else {
         Alert.alert("알림", "오류 발생");
       }

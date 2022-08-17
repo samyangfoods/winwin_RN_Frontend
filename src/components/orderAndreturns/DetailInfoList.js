@@ -27,7 +27,9 @@ const DetailInfoList = ({ orderData, totalPrice, totalQuantity }) => {
               <Text style={styles.rowMiddle}>{data.product_name}</Text>
               <Text style={styles.row}>{data.quantity}</Text>
               <Text style={styles.row}>
-                {data.quantity * data.product_price}
+                {(data.quantity * data.product_price)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Text>
             </View>
           </View>
