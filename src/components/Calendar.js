@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { DateText, DateBtn, CalendarContainer } from "../styles/Component";
 
-function Calendar({ date, setDate }) {
+function Calendar({ date, setDate, isOrderRevision }) {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
@@ -23,7 +23,10 @@ function Calendar({ date, setDate }) {
 
   return (
     <CalendarContainer>
-      <DateBtn onPress={showDatepicker}>
+      <DateBtn
+        onPress={showDatepicker}
+        disabled={isOrderRevision ? true : false}
+      >
         <DateText>{`${year}년 ${month}월 ${date_}일`}</DateText>
       </DateBtn>
 

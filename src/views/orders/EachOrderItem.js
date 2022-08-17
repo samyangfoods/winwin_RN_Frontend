@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   EachOrderItemContainer,
   EachOrderItemTextInput,
 } from "../../styles/orders/Orders";
 
-const EachOrderItem = ({ item, setSelectedItems, selectedItems }) => {
+const EachOrderItem = ({
+  item,
+  setSelectedItems,
+  selectedItems,
+  route,
+  preOrderedItem,
+}) => {
   const [quantity, setQuantity] = useState("");
 
   const handleItemQuantity = () => {
@@ -37,6 +43,16 @@ const EachOrderItem = ({ item, setSelectedItems, selectedItems }) => {
       setSelectedItems([productInfo]);
     }
   };
+
+  // For the case of order revision
+  useEffect(() => {
+    if (route.name !== "주문수정") return;
+    preOrderedItem.map((data) => {
+      if (item.product_name == data.product_name) {
+        setQuantity(data.quantity);
+      }
+    });
+  }, []);
 
   return (
     <EachOrderItemContainer>

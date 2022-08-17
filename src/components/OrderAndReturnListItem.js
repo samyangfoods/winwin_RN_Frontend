@@ -4,16 +4,16 @@ import { Alert } from "react-native";
 import { useOrderList, useOrderRemovalById } from "../hooks/orderHooks";
 import { imageW140 } from "../secrets/urlSetting";
 import {
-  OARContainer,
   OARTitle,
+  OARContainer,
   OARTitleContainer,
   OARContentsContainer,
-  OARComponentsContainer,
   OARUserInfoContainer,
+  OARComponentsContainer,
 } from "../styles/OrderAndReturn";
 import { Image } from "../styles/profiles/UserProfile";
 
-const OrderAndReturnListItem = ({ item, userInfo, setOrderList }) => {
+const OrderAndReturnListItem = ({ item, userInfo, navigation }) => {
   const [totalCost, setTotalCost] = useState("");
   const [totalQuantity, setTotalQuantity] = useState("");
 
@@ -34,27 +34,13 @@ const OrderAndReturnListItem = ({ item, userInfo, setOrderList }) => {
     countTotal();
   }, []);
 
-  const processOrderDelete = () => {
-    Alert.alert("알림", "삭제하시겠습니까?", [
-      { text: "아니오" },
-      {
-        text: "네",
-        onPress: async () => {
-          const data = await useOrderRemovalById(userInfo.token, item._id);
-          if (data) {
-            const response = await useOrderList(userInfo.token);
-            setOrderList(response);
-            Alert.alert("알림", "주문이 삭제되었습니다.");
-          }
-        },
-      },
-    ]);
-  };
-
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log("Hello");
+        navigation.navigate("주문확인", {
+          orderInfo: item,
+          orderData: [JSON.parse(item.orderDetail)],
+        });
       }}
     >
       <OARContainer>
@@ -75,8 +61,8 @@ const OrderAndReturnListItem = ({ item, userInfo, setOrderList }) => {
 
         <OARContentsContainer>
           <OARComponentsContainer>
-            <Text style={{ fontSize: "13px" }}>
-              {item.deliveryDate.slice(1, 11)}
+            <Text style={{ fontSize: 13 }}>
+              {item.deliveryDate.slice(0, 10)}
             </Text>
           </OARComponentsContainer>
           <OARComponentsContainer>

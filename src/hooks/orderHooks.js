@@ -25,29 +25,11 @@ export const useOrderItemById = async (token, orderId) => {
   return data;
 };
 
-export const useOrderUpdateById = async (
-  token,
-  orderId,
-  deliveryPlace,
-  deliveryAddress,
-  deliveryDate,
-  deliveryTime,
-  orderDetail
-) => {
-  const formData = new FormData();
-
-  formData.append("deliveryPlace", deliveryPlace);
-  formData.append("deliveryAddress", deliveryAddress);
-  formData.append("deliveryDate", deliveryDate);
-  formData.append("deliveryTime", deliveryTime);
-  formData.append("orderDetail", orderDetail);
-
+export const useOrderUpdateById = async (token, orderId, orderObj) => {
   const { data } = await axios.put(
     `${basicApiUrl}/order/${orderId}`,
-    formData,
-    {
-      headers: { authorization: `Bearer ${token}` },
-    }
+    orderObj,
+    { headers: { authorization: `Bearer ${token}` } }
   );
 
   return data;

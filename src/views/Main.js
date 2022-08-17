@@ -27,17 +27,16 @@ const Main = ({ navigation }) => {
   const [searchResult, setSearchResult] = useState(promotionArray);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  // Handling Functions
+  const setPromotionData = async () => {
+    const promotionData = await usePromotions(token);
+    setPromotions(null);
+
+    if (promotionData) setPromotions(promotionData);
+  };
+
   // Set the current user's promotion data
   useEffect(() => {
-    const setPromotionData = async () => {
-      const promotionData = await usePromotions(token);
-      setPromotions(null);
-
-      if (promotionData) {
-        setPromotions(promotionData);
-      }
-    };
-
     setPromotionData();
   }, [promotionArray]);
 

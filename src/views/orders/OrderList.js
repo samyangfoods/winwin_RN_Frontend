@@ -10,11 +10,12 @@ import { useSelector } from "react-redux";
 import NotFound from "../../components/NotFound";
 
 const OrderList = ({ navigation }) => {
-  // State Variables
-  const [orderList, setOrderList] = useState([]);
-
   // Redux Variables
   const userInfo = useSelector((state) => state.user);
+  const orderData = useSelector((state) => state.order.array);
+
+  // State Variables
+  const [orderList, setOrderList] = useState(orderData);
 
   // UseEffect to set order list
   useEffect(() => {
@@ -25,7 +26,7 @@ const OrderList = ({ navigation }) => {
     };
 
     requestOrderList();
-  }, []);
+  }, [orderData]);
 
   return (
     <MainContainer
@@ -42,7 +43,7 @@ const OrderList = ({ navigation }) => {
               key={item._id}
               item={item}
               userInfo={userInfo}
-              setOrderList={setOrderList}
+              navigation={navigation}
             />
           ))}
         </OARScrollView>
