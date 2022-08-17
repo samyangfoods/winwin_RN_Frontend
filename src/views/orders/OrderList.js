@@ -14,18 +14,17 @@ const OrderList = ({ navigation }) => {
   const [orderList, setOrderList] = useState([]);
 
   // Redux Variables
-  const token = useSelector((state) => state.user.token);
+  const userInfo = useSelector((state) => state.user);
 
   // UseEffect to set order list
   useEffect(() => {
     const requestOrderList = async () => {
-      const response = await useOrderList(token);
+      const response = await useOrderList(userInfo.token);
 
       setOrderList(response);
     };
 
     requestOrderList();
-    console.log("Hello");
   }, []);
 
   return (
@@ -36,15 +35,20 @@ const OrderList = ({ navigation }) => {
     >
       <Header />
 
-      <OARScrollView>
-        {orderList?.map((item) => (
-          <OrderAndReturnListItem
-            key={item._id}
-            item={item}
-            setOrderList={setOrderList}
-          />
-        ))}
-      </OARScrollView>
+      {orderList.length != 0 ? (
+        <OARScrollView>
+          {orderList.map((item) => (
+            <OrderAndReturnListItem
+              key={item._id}
+              item={item}
+              userInfo={userInfo}
+              setOrderList={setOrderList}
+            />
+          ))}
+        </OARScrollView>
+      ) : (
+        <NotFound title={"주문"} />
+      )}
 
       {/* Order Creation Button */}
       <PlusBtn onPress={() => navigation.navigate("주문하기")}>

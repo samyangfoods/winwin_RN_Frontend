@@ -12,9 +12,7 @@ const NotFound = ({ title }) => {
   };
 
   return (
-    <NotFoundContainer
-      style={{ flex: 10, alignItems: "center", justifyContent: "center" }}
-    >
+    <NotFoundContainer>
       <AntDesign name="exclamationcircleo" size={24} color="#aaa" />
       <Text style={{ color: "#aaa", marginTop: 5 }}>
         {`등록된 ${sentenceCompletion()} 없습니다.`}
