@@ -10,6 +10,7 @@ export const Text = styled.Text`
 `;
 export const BasicContainer = styled.View`
   flex: 1;
+  height: 100%;
 `;
 export const NotFoundContainer = styled.View`
   flex: 1;

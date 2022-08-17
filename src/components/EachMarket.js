@@ -17,9 +17,6 @@ import {
 import { Title } from "../styles/Style";
 
 const Market = ({ item, navigation }) => {
-  console.log("----------");
-  console.log(item.marketName, item.marketImage);
-
   return (
     <RouteBtn
       onPress={() =>

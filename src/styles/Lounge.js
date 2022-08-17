@@ -7,8 +7,8 @@ export const MainContainer = styled.View`
   flex: 1;
 `;
 export const Top = styled.View`
-  flex: 1;
   justify-content: center;
+  margin: 3% 0;
 `;
 export const Bottom = styled.FlatList`
   flex: 10;
