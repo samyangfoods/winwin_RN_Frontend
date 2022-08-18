@@ -36,8 +36,8 @@ const OrderAndReturnListItem = ({ item, userInfo, navigation }) => {
     <TouchableOpacity
       onPress={() => {
         navigation.navigate("주문확인", {
-          orderInfo: item,
-          orderData: [JSON.parse(item.orderDetail)],
+          orderInfo: item ? item : null,
+          orderData: [JSON.parse(item?.orderDetail)],
         });
       }}
     >
@@ -60,7 +60,7 @@ const OrderAndReturnListItem = ({ item, userInfo, navigation }) => {
         <OARContentsContainer>
           <OARComponentsContainer>
             <Text style={{ fontSize: 13 }}>
-              {item.deliveryDate.slice(0, 10)}
+              {item?.deliveryDate.slice(0, 10)}
             </Text>
           </OARComponentsContainer>
           <OARComponentsContainer>
@@ -70,7 +70,7 @@ const OrderAndReturnListItem = ({ item, userInfo, navigation }) => {
             <Text>{totalCost}</Text>
           </OARComponentsContainer>
           <OARComponentsContainer>
-            <Text>{item.deliveryTime}</Text>
+            <Text>{item?.deliveryTime}</Text>
           </OARComponentsContainer>
         </OARContentsContainer>
 
