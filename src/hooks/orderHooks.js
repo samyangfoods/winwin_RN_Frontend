@@ -1,27 +1,5 @@
-<<<<<<< HEAD
 import axios from 'axios'
-import { basicApiUrl } from './urlSetting'
-
-export const useOrderCreation = async (
-  token,
-  deliveryPlace,
-  deliveryAddress,
-  deliveryDate,
-  deliveryTime,
-  orderDetail
-) => {
-  const formData = new FormData()
-
-  formData.append('deliveryPlace', deliveryPlace)
-  formData.append('deliveryAddress', deliveryAddress)
-  formData.append('deliveryDate', JSON.stringify(deliveryDate))
-  formData.append('deliveryTime', deliveryTime)
-  formData.append('orderDetail', JSON.stringify(orderDetail))
-
-  console.log('🔥', formData)
-=======
-import axios from "axios";
-import { basicApiUrl } from "../secrets/urlSetting";
+import { basicApiUrl } from '../secrets/urlSetting'
 
 export const useOrderCreation = async (token, orderObj) => {
   const {
@@ -30,47 +8,37 @@ export const useOrderCreation = async (token, orderObj) => {
     deliveryDate,
     deliveryTime,
     orderDetail,
-  } = orderObj;
+  } = orderObj
 
-  const formData = new FormData();
+  const formData = new FormData()
 
-  formData.append("deliveryPlace", deliveryPlace);
-  formData.append("deliveryAddress", deliveryAddress);
-  // formData.append("deliveryDate", JSON.stringify(deliveryDate));
-  formData.append("deliveryDate", "2022-01-01");
-  formData.append("deliveryTime", deliveryTime);
-  // formData.append("orderDetail", JSON.stringify(orderDetail));
-  formData.append("orderDetail", "Hello");
+  formData.append('deliveryPlace', deliveryPlace)
+  formData.append('deliveryAddress', deliveryAddress)
+  formData.append('deliveryDate', JSON.stringify(deliveryDate))
+  formData.append('deliveryTime', deliveryTime)
+  formData.append('orderDetail', JSON.stringify(orderDetail))
 
-  console.log("🔥 FormData created: ", formData);
->>>>>>> 412933d7e3c0d301d25cd13a861c0419997e12ef
+  // console.log("🔥 FormData created: ", formData);
 
   const { data } = await axios.post(`${basicApiUrl}/order`, formData, {
-    headers: { authorization: `Bearer ${token}` },
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
   })
 
-<<<<<<< HEAD
+  console.log('🔥 response: ', data)
+
   return data
 }
-=======
-  // console.log("🔥 response: ", data);
-
-  return data;
-};
->>>>>>> 412933d7e3c0d301d25cd13a861c0419997e12ef
 
 export const useOrderList = async (token) => {
   const { data } = await axios.get(`${basicApiUrl}/order`, {
     headers: { authorization: `Bearer ${token}` },
   })
 
-<<<<<<< HEAD
-  return data
+  return data.myOrders
 }
-=======
-  return data.myOrders;
-};
->>>>>>> 412933d7e3c0d301d25cd13a861c0419997e12ef
 
 export const useOrderItem = async () => {
   console.log('Hello world')
