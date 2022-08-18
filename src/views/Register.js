@@ -183,7 +183,7 @@ const Register = ({ navigation }) => {
           />
 
           <Input
-            placeholderTextColor="#000" 
+            placeholderTextColor="#000"
             placeholder="이름"
             value={userName}
             autoCapitalize="none"
@@ -193,7 +193,7 @@ const Register = ({ navigation }) => {
             blurOnSubmit={false}
           />
           <Input
-            placeholderTextColor="#000" 
+            placeholderTextColor="#000"
             placeholder="아이디"
             value={userId}
             autoCapitalize="none"
@@ -204,7 +204,7 @@ const Register = ({ navigation }) => {
           />
           <PasswordContainer>
             <Input
-              placeholderTextColor="#000" 
+              placeholderTextColor="#000"
               placeholder="비밀번호"
               secureTextEntry={showing}
               value={password}
@@ -225,7 +225,7 @@ const Register = ({ navigation }) => {
 
           <PasswordContainer>
             <Input
-              placeholderTextColor="#000" 
+              placeholderTextColor="#000"
               placeholder="비밀번호 확인"
               secureTextEntry={showingConfirmation}
               value={passwordConfirmation}
@@ -265,7 +265,7 @@ const Register = ({ navigation }) => {
               onSubmitEditing={() => channelRef.current?.focus()}
               blurOnSubmit={false}
               style={{ width: 220 }}
-              placeholderTextColor="#000" 
+              placeholderTextColor="#000"
             />
             <Channel
               pickedData={channel}
@@ -285,7 +285,7 @@ const Register = ({ navigation }) => {
             onBlur={() => setPhoneNumber(usePhoneNumberFormat(phoneNumber))}
             onPressIn={() => cleanPhoneNumberFormat(phoneNumber)}
             style={{ marginBottom: 15 }}
-            placeholderTextColor="#000" 
+            placeholderTextColor="#000"
           />
 
           <Btn onPress={handleModal}>

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity } from "react-native";
-import { Alert } from "react-native";
-import { useOrderList, useOrderRemovalById } from "../hooks/orderHooks";
 import { imageW140 } from "../secrets/urlSetting";
 import {
   OARTitle,
@@ -18,11 +16,11 @@ const OrderAndReturnListItem = ({ item, userInfo, navigation }) => {
   const [totalQuantity, setTotalQuantity] = useState("");
 
   useEffect(() => {
-    const countTotal = () => {
+    const countTotal = async () => {
       let eachQuantity = 0;
       let eachCost = 0;
-      const orderDetail = JSON.parse(item.orderDetail);
-      orderDetail.map((data) => {
+      const orderDetail = await JSON.parse(item?.orderDetail);
+      orderDetail?.map((data) => {
         eachQuantity += parseInt(data.quantity);
         eachCost += parseInt(data.product_price);
       });
