@@ -95,7 +95,7 @@ const UserInfo = ({ navigation, route }) => {
 
     try {
       setIsLoading(true);
-      console.log("🔥 token in profileChange", token);
+
       const response = await useProfileChange(newUserInfo, token);
       if (response) {
         dispatch(

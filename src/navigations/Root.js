@@ -70,6 +70,17 @@ const Root = () => (
       options={{ headerShown: true }}
     />
     <Nav.Screen
+      name="주문수정"
+      component={OrderCreation}
+      options={{ headerShown: true }}
+    />
+    <Nav.Screen
+      name="주문확인"
+      component={OrderDetails}
+      getId={({ params }) => params.id}
+      options={{ headerShown: true }}
+    />
+    <Nav.Screen
       name="주문상세"
       component={OrderDetails}
       getId={({ params }) => params.id}

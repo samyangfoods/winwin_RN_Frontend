@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import axios from 'axios'
 import { basicApiUrl } from '../secrets/urlSetting'
 
@@ -31,65 +32,58 @@ export const useOrderCreation = async (token, orderObj) => {
 
   return data
 }
+=======
+import axios from "axios";
+import { basicApiUrl } from "../secrets/urlSetting";
+
+export const useOrderCreation = async (token, orderObj) => {
+  const { data } = await axios.post(`${basicApiUrl}/order`, orderObj, {
+    headers: { authorization: `Bearer ${token}` },
+  });
+
+  return data;
+};
+>>>>>>> b7ab14ed0830f7721f521256688f1be9c6a563bb
 
 export const useOrderList = async (token) => {
   const { data } = await axios.get(`${basicApiUrl}/order`, {
     headers: { authorization: `Bearer ${token}` },
-  })
+  });
 
+<<<<<<< HEAD
   return data.myOrders
 }
 
 export const useOrderItem = async () => {
   console.log('Hello world')
 }
+=======
+  return data.myOrders;
+};
+>>>>>>> b7ab14ed0830f7721f521256688f1be9c6a563bb
 
 export const useOrderItemById = async (token, orderId) => {
   const { data } = await axios.get(`${basicApiUrl}/order/${orderId}`, {
     headers: { authorization: `Bearer ${token}` },
-  })
+  });
 
-  return data
-}
+  return data;
+};
 
-export const useOrderUpdateById = async (
-  token,
-  orderId,
-  deliveryPlace,
-  deliveryAddress,
-  deliveryDate,
-  deliveryTime,
-  orderDetail
-) => {
-  console.log('Delivery Place: ', deliveryPlace)
-  console.log('Delivery Address: ', deliveryAddress)
-  console.log('Delivery Date: ', deliveryDate)
-  console.log('Delivery Time: ', deliveryTime)
-  console.log('Order Detail: ', orderDetail)
-
-  const formData = new FormData()
-
-  formData.append('deliveryPlace', deliveryPlace)
-  formData.append('deliveryAddress', deliveryAddress)
-  formData.append('deliveryDate', deliveryDate)
-  formData.append('deliveryTime', deliveryTime)
-  formData.append('orderDetail', orderDetail)
-
+export const useOrderUpdateById = async (token, orderId, orderObj) => {
   const { data } = await axios.put(
     `${basicApiUrl}/order/${orderId}`,
-    formData,
-    {
-      headers: { authorization: `Bearer ${token}` },
-    }
-  )
+    orderObj,
+    { headers: { authorization: `Bearer ${token}` } }
+  );
 
-  return data
-}
+  return data;
+};
 
-export const userOrderRemoval = async (token, orderId) => {
+export const userOrderRemovalById = async (token, orderId) => {
   const { data } = await axios.delete(`${basicApiUrl}/order/${orderId}`, {
     headers: { authorization: `Bearer ${token}` },
-  })
+  });
 
-  return data
-}
+  return data;
+};

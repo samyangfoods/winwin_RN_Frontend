@@ -120,8 +120,6 @@ const MarketInfoChange = ({ navigation, route }) => {
 
     try {
       if (response) {
-        console.log(response);
-        // Update Market redux if the previous process was done successfully.
         const marketData = await useMarketListWithId(token);
         if (marketData) {
           dispatch(

@@ -10,6 +10,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import { usePromotions } from "../hooks/promotionHooks";
 import { MainContainer, Top, Bottom, PlusBtn } from "../styles/Lounge";
+import { BasicContainer } from "../styles/Style";
 
 /*
 Main page helps users to check current promotion data.
@@ -27,17 +28,16 @@ const Main = ({ navigation }) => {
   const [searchResult, setSearchResult] = useState(promotionArray);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  // Handling Functions
+  const setPromotionData = async () => {
+    const promotionData = await usePromotions(token);
+    setPromotions(null);
+
+    if (promotionData) setPromotions(promotionData);
+  };
+
   // Set the current user's promotion data
   useEffect(() => {
-    const setPromotionData = async () => {
-      const promotionData = await usePromotions(token);
-      setPromotions(null);
-
-      if (promotionData) {
-        setPromotions(promotionData);
-      }
-    };
-
     setPromotionData();
   }, [promotionArray]);
 
@@ -72,7 +72,7 @@ const Main = ({ navigation }) => {
     >
       {/* Body */}
       <Header />
-      <View style={{ flex: 1, padding: 10 }}>
+      <BasicContainer style={{ padding: 10 }}>
         <Top>
           <Search
             promotionArray={promotionArray}
@@ -94,7 +94,7 @@ const Main = ({ navigation }) => {
         ) : (
           <DataLoading />
         )}
-      </View>
+      </BasicContainer>
 
       {/* Promotion Creation Button */}
       <PlusBtn onPress={() => navigation.navigate("행사등록")}>

@@ -9,10 +9,13 @@ import {
   OrderCreationContainer,
 } from "../../styles/orders/Orders";
 
-const OrderList = ({ navigation }) => {
+const OrderList = ({ navigation, route }) => {
   // State Variables
   const [orderItems, setOrderItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+
+  // Variables
+  const orderId = route.params?.orderId;
 
   // This useEffect will arrange product data into specific sections
   useEffect(() => {
@@ -67,6 +70,12 @@ const OrderList = ({ navigation }) => {
     setOrderItems(sampleArray);
   }, []);
 
+  // For the case of Order Revision
+  useEffect(() => {
+    if (route.name !== "주문수정") return;
+    setSelectedItems(route.params.orderData[0]);
+  }, []);
+
   // Handling functions
   const renderEachOrderItem = ({ item }) => {
     return (
@@ -75,6 +84,8 @@ const OrderList = ({ navigation }) => {
         item={item}
         setSelectedItems={setSelectedItems}
         selectedItems={selectedItems}
+        route={route}
+        preOrderedItem={route.params?.orderData[0]}
       />
     );
   };
@@ -94,14 +105,20 @@ const OrderList = ({ navigation }) => {
 
       <OrderCreationButton
         onPress={() =>
-          navigation.navigate("주문상세", { orderData: [selectedItems] })
+          navigation.navigate("주문상세", {
+            orderId: orderId,
+            orderData: [selectedItems],
+          })
         }
         disabled={selectedItems.length == 0 ? true : false}
         style={{
           backgroundColor: selectedItems.length != 0 ? "#ff7d0d" : "#aaa",
+          marginBottom: 30,
         }}
       >
-        <Text style={{ color: "white" }}>주문하기</Text>
+        <Text style={{ color: "white" }}>
+          {route.name == "주문수정" ? "수정" : "주문"}하기
+        </Text>
       </OrderCreationButton>
     </OrderCreationContainer>
   );

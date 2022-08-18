@@ -10,22 +10,23 @@ import { useSelector } from "react-redux";
 import NotFound from "../../components/NotFound";
 
 const OrderList = ({ navigation }) => {
-  // State Variables
-  const [orderList, setOrderList] = useState([]);
-
   // Redux Variables
-  const token = useSelector((state) => state.user.token);
+  const userInfo = useSelector((state) => state.user);
+  const orderData = useSelector((state) => state.order.array);
+
+  // State Variables
+  const [orderList, setOrderList] = useState(orderData);
 
   // UseEffect to set order list
   useEffect(() => {
     const requestOrderList = async () => {
-      const response = await useOrderList(token);
+      const response = await useOrderList(userInfo.token);
 
       setOrderList(response);
     };
 
     requestOrderList();
-  }, []);
+  }, [orderData]);
 
   return (
     <MainContainer
@@ -35,11 +36,20 @@ const OrderList = ({ navigation }) => {
     >
       <Header />
 
-      <OARScrollView>
-        {orderList?.map((item) => (
-          <OrderAndReturnListItem key={item.gunnyNumber} item={item} />
-        ))}
-      </OARScrollView>
+      {orderList.length != 0 ? (
+        <OARScrollView>
+          {orderList.map((item) => (
+            <OrderAndReturnListItem
+              key={item._id}
+              item={item}
+              userInfo={userInfo}
+              navigation={navigation}
+            />
+          ))}
+        </OARScrollView>
+      ) : (
+        <NotFound title={"주문"} />
+      )}
 
       {/* Order Creation Button */}
       <PlusBtn onPress={() => navigation.navigate("주문하기")}>

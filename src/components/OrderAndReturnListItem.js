@@ -1,78 +1,88 @@
-import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
-import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { useOrderItem } from "../hooks/orderHooks";
+import React, { useEffect, useState } from "react";
+import { Text, TouchableOpacity } from "react-native";
+import { Alert } from "react-native";
+import { useOrderList, useOrderRemovalById } from "../hooks/orderHooks";
+import { imageW140 } from "../secrets/urlSetting";
 import {
+  OARTitle,
   OARContainer,
-  OARNumberButton,
-  OARVerticalLineContainer,
-  OARVerticalLineTextInput,
-  OARNumberButtonView,
-  OARHorizontalContainer,
+  OARTitleContainer,
+  OARContentsContainer,
+  OARUserInfoContainer,
+  OARComponentsContainer,
 } from "../styles/OrderAndReturn";
+import { Image } from "../styles/profiles/UserProfile";
 
-const OrderAndReturnListItem = ({ item }) => {
+const OrderAndReturnListItem = ({ item, userInfo, navigation }) => {
+  const [totalCost, setTotalCost] = useState("");
+  const [totalQuantity, setTotalQuantity] = useState("");
+
+  useEffect(() => {
+    const countTotal = () => {
+      let eachQuantity = 0;
+      let eachCost = 0;
+      const orderDetail = JSON.parse(item.orderDetail);
+      orderDetail.map((data) => {
+        eachQuantity += parseInt(data.quantity);
+        eachCost += parseInt(data.product_price);
+      });
+
+      setTotalQuantity(eachQuantity);
+      setTotalCost(eachCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    };
+
+    countTotal();
+  }, []);
+
   return (
-    <TouchableOpacity onPress={() => useOrderItem()}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("주문확인", {
+          orderInfo: item,
+          orderData: [JSON.parse(item.orderDetail)],
+        });
+      }}
+    >
       <OARContainer>
-        <OARHorizontalContainer>
-          <OARNumberButton>
-            <OARNumberButtonView>
-              <Text style={{ color: "#fff", fontSize: 15 }}>
-                {item.gunnyNumber}
-              </Text>
-            </OARNumberButtonView>
-          </OARNumberButton>
+        <OARTitleContainer>
+          <OARComponentsContainer>
+            <OARTitle>날짜</OARTitle>
+          </OARComponentsContainer>
+          <OARComponentsContainer>
+            <OARTitle>수량</OARTitle>
+          </OARComponentsContainer>
+          <OARComponentsContainer>
+            <OARTitle>금액</OARTitle>
+          </OARComponentsContainer>
+          <OARComponentsContainer>
+            <OARTitle>배송시간</OARTitle>
+          </OARComponentsContainer>
+        </OARTitleContainer>
 
-          <View style={{ marginLeft: 5 }}>
-            <Text style={{ fontSize: 12 }}>{item.ReturnMonth}</Text>
-          </View>
+        <OARContentsContainer>
+          <OARComponentsContainer>
+            <Text style={{ fontSize: 13 }}>
+              {item.deliveryDate.slice(0, 10)}
+            </Text>
+          </OARComponentsContainer>
+          <OARComponentsContainer>
+            <Text>{totalQuantity}</Text>
+          </OARComponentsContainer>
+          <OARComponentsContainer>
+            <Text>{totalCost}</Text>
+          </OARComponentsContainer>
+          <OARComponentsContainer>
+            <Text>{item.deliveryTime}</Text>
+          </OARComponentsContainer>
+        </OARContentsContainer>
 
-          <OARVerticalLineContainer>
-            <OARVerticalLineTextInput
-              editable={false}
-              selectTextOnFocus={false}
-            />
-          </OARVerticalLineContainer>
-
-          <View>
-            <Text style={{ fontSize: 12 }}>{item.sumValue} EA</Text>
-          </View>
-
-          <OARVerticalLineContainer>
-            <OARVerticalLineTextInput
-              editable={false}
-              selectTextOnFocus={false}
-            />
-          </OARVerticalLineContainer>
-
-          <View>
-            <Text style={{ fontSize: 12 }}>{item.sumPrice} 원</Text>
-          </View>
-
-          <OARVerticalLineContainer>
-            <OARVerticalLineTextInput
-              editable={false}
-              selectTextOnFocus={false}
-            />
-          </OARVerticalLineContainer>
-
-          <View style={{ width: 30 }}>
-            <TouchableOpacity>
-              <FontAwesome name="edit" size={20} color="black" />
-            </TouchableOpacity>
-          </View>
-
-          <View style={{ marginRight: 10 }}>
-            <TouchableOpacity>
-              <MaterialCommunityIcons
-                name="delete-circle-outline"
-                size={20}
-                color="black"
-              />
-            </TouchableOpacity>
-          </View>
-        </OARHorizontalContainer>
+        <OARUserInfoContainer>
+          <Image
+            source={{ uri: imageW140 + userInfo.userImage }}
+            style={{ width: 36, height: 36 }}
+          />
+          <Text style={{ padding: 10 }}>{userInfo.storeName}</Text>
+        </OARUserInfoContainer>
       </OARContainer>
     </TouchableOpacity>
   );
