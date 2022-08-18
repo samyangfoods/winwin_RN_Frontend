@@ -11,27 +11,7 @@ import {
 } from '../styles/OrderAndReturn'
 import { Image } from '../styles/profiles/UserProfile'
 
-const OrderAndReturnListItem = ({ item, userInfo, navigation }) => {
-  const [totalCost, setTotalCost] = useState('')
-  const [totalQuantity, setTotalQuantity] = useState('')
-
-  useEffect(() => {
-    const countTotal = async () => {
-      let eachQuantity = 0
-      let eachCost = 0
-      const orderDetail = await JSON.parse(item?.orderDetail)
-      orderDetail?.map((data) => {
-        eachQuantity += parseInt(data.quantity)
-        eachCost += parseInt(data.product_price)
-      })
-
-      setTotalQuantity(eachQuantity)
-      setTotalCost(eachCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
-    }
-
-    countTotal()
-  }, [])
-
+const ReturnListItem = ({ item, userInfo, navigation }) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -44,7 +24,10 @@ const OrderAndReturnListItem = ({ item, userInfo, navigation }) => {
       <OARContainer>
         <OARTitleContainer>
           <OARComponentsContainer>
-            <OARTitle>날짜</OARTitle>
+            <OARTitle>년월</OARTitle>
+          </OARComponentsContainer>
+          <OARComponentsContainer>
+            <OARTitle>마대번호</OARTitle>
           </OARComponentsContainer>
           <OARComponentsContainer>
             <OARTitle>수량</OARTitle>
@@ -52,38 +35,33 @@ const OrderAndReturnListItem = ({ item, userInfo, navigation }) => {
           <OARComponentsContainer>
             <OARTitle>금액</OARTitle>
           </OARComponentsContainer>
-          <OARComponentsContainer>
-            <OARTitle>배송시간</OARTitle>
-          </OARComponentsContainer>
         </OARTitleContainer>
 
         <OARContentsContainer>
           <OARComponentsContainer>
-            <Text style={{ fontSize: 13 }}>
-              {item?.deliveryDate.slice(0, 10)}
-            </Text>
+            <Text style={{ fontSize: 13 }}>22년8월</Text>
           </OARComponentsContainer>
           <OARComponentsContainer>
-            <Text>{totalQuantity}</Text>
+            <Text>1번마대</Text>
           </OARComponentsContainer>
           <OARComponentsContainer>
-            <Text>{totalCost}</Text>
+            <Text>101 EA</Text>
           </OARComponentsContainer>
           <OARComponentsContainer>
-            <Text>{item?.deliveryTime}</Text>
+            <Text>234,134 원</Text>
           </OARComponentsContainer>
         </OARContentsContainer>
 
-        <OARUserInfoContainer>
+        {/* <OARUserInfoContainer>
           <Image
             source={{ uri: imageW140 + userInfo.userImage }}
             style={{ width: 36, height: 36 }}
           />
           <Text style={{ padding: 10 }}>{userInfo.storeName}</Text>
-        </OARUserInfoContainer>
+        </OARUserInfoContainer> */}
       </OARContainer>
     </TouchableOpacity>
   )
 }
 
-export default OrderAndReturnListItem
+export default ReturnListItem
