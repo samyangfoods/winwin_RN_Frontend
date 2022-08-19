@@ -5,10 +5,10 @@ import {
   Button,
   StyleSheet,
   TextInput,
+  Alert,
 } from 'react-native'
 import React, { useState } from 'react'
-import marketSlice from '../../redux/slices/market'
-import returnSlice from '../../redux/slices/return'
+import returnBagSlice from '../../redux/slices/returnbag'
 import { useDispatch, useSelector } from 'react-redux'
 import { gunnyNumber, yearMonth } from '../../datas/ReturnData'
 import { Picker } from 'react-native-woodpicker'
@@ -19,6 +19,7 @@ import {
 } from '../../styles/PromotionStyle'
 import CategoryOfGunny from '../../components/CategoryOfReturnGunny'
 import CategoryOfYearMohth from '../../components/CategoryOfReturnYearMonth'
+import { useRetrunBagList, useReturnBagCreation } from '../../hooks/returnHooks'
 
 export default function ReturnConfirm({
   navigation,
@@ -32,18 +33,44 @@ export default function ReturnConfirm({
   })
   const [returnDate, setReturnDate] = useState({
     label: '22년 1월',
-    value: '22년 1월',
+    value: 1,
   })
+
+  // Redux
+  const dispatch = useDispatch()
+  const token = useSelector((state) => state.user.token)
 
   const Sum = Math.round(returnSumPrice)
   const TotalSum = Sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-  console.log(returnBagNumber)
+  const returnSumbit = async () => {
+    const returnObj = {
+      gunnyNumber: returnBagNumber,
+      YearMonth: returnDate,
+      totalQty: returnSumEA,
+      totalValue: returnSumPrice,
+      gunnySack: filteredReturnList,
+    }
 
-  const handlePromotionCost = (text) => {
-    setPromotionCost(text)
+    try {
+      const data = await useReturnBagCreation(token, returnObj)
+
+      if (data) {
+        const response = await useRetrunBagList(token)
+        if (response) {
+          dispatch(
+            returnBagSlice.actions.setReturnBag({
+              array: [...response],
+            })
+          )
+        }
+      }
+      Alert.alert('반품이 등록되었습니다!!')
+      navigation.navigate('반품 리스트')
+    } catch (err) {
+      console.log(err)
+    }
   }
-  const returnSumbit = () => {}
 
   return (
     <View style={styles.tableContainer}>

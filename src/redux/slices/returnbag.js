@@ -4,14 +4,14 @@ const initialState = {
   array: [],
 }
 
-const returnSlice = createSlice({
+const returnBagSlice = createSlice({
   name: 'returnbag',
   initialState,
   reducers: {
-    setReturn(state, action) {
+    setReturnBag(state, action) {
       state.array = action.payload.array
     },
   },
 })
 
-export default returnSlice
+export default returnBagSlice
