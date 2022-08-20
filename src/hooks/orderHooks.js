@@ -2,6 +2,9 @@ import axios from "axios";
 import { basicApiUrl } from "../secrets/urlSetting";
 
 export const useOrderCreation = async (token, orderObj) => {
+  console.log("🔥🔥🔥🔥🔥🔥");
+  console.log(orderObj);
+
   const { data } = await axios.post(`${basicApiUrl}/order`, orderObj, {
     headers: { authorization: `Bearer ${token}` },
   });

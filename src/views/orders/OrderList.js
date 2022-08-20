@@ -29,11 +29,7 @@ const OrderList = ({ navigation }) => {
   }, [orderData]);
 
   return (
-    <MainContainer
-      style={{
-        marginTop: Constant.statusBarHeight,
-      }}
-    >
+    <MainContainer style={{ marginTop: Constant.statusBarHeight }}>
       <Header />
 
       {orderList.length != 0 ? (

@@ -131,7 +131,7 @@ const OrderDetails = ({ route, navigation }) => {
 
   // Handling Functions
   const handleLocation = (text) => {
-    setSelectedLocation(text.label);
+    setSelectedLocation(text);
 
     switch (text.label) {
       case "창고":
@@ -146,7 +146,7 @@ const OrderDetails = ({ route, navigation }) => {
     }
   };
   const handleDelivery = (text) => {
-    setSelectedDelivery(text.label);
+    setSelectedDelivery(text);
   };
   const processOrderChange = () => {
     navigation.navigate("주문수정", {

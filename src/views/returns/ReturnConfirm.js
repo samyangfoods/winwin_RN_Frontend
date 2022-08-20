@@ -49,8 +49,8 @@ export default function ReturnConfirm({
   const returnSumbit = async () => {
     try {
       const returnObj = {
-        gunnyNumber: returnBagNumber,
-        yearMonth: returnDate,
+        gunnyNumber: returnBagNumber.label,
+        yearMonth: returnDate.label,
         totalQty: returnSumEA,
         totalValue: returnSumPrice,
         gunnySack: JSON.stringify(filteredReturnList),
