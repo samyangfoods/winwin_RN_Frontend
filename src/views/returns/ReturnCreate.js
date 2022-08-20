@@ -54,6 +54,7 @@ export default function ReturnCreate({ navigation }) {
           returnSumEA={returnSumEA}
           returnSumPrice={returnSumPrice}
           filteredReturnList={filteredReturnList}
+          navigation={navigation}
         />
       ) : (
         <View style={{ flex: 1 }}>
