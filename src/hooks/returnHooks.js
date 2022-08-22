@@ -11,10 +11,10 @@ export const useReturnBagCreation = async (token, returnObj) => {
   return data
 }
 
-export const useRetrunBagList = async (token) => {
+export const useReturnBagList = async (token) => {
   const { data } = await axios.get(`${basicApiUrl}/returnbag`, {
     headers: { authorization: `Bearer ${token}` },
   })
 
-  return data.myReturnBag
+  return data.myReturnBags
 }
