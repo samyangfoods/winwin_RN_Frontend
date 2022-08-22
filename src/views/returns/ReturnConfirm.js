@@ -19,7 +19,7 @@ import {
 } from '../../styles/PromotionStyle'
 import CategoryOfGunny from '../../components/CategoryOfReturnGunny'
 import CategoryOfYearMohth from '../../components/CategoryOfReturnYearMonth'
-import { useRetrunBagList, useReturnBagCreation } from '../../hooks/returnHooks'
+import { useReturnBagList, useReturnBagCreation } from '../../hooks/returnHooks'
 
 export default function ReturnConfirm({
   navigation,
@@ -58,7 +58,7 @@ export default function ReturnConfirm({
       console.log('reponseData', data)
 
       if (data) {
-        const response = await useRetrunBagList(token)
+        const response = await useReturnBagList(token)
         if (response) {
           dispatch(
             returnBagSlice.actions.setReturnBag({

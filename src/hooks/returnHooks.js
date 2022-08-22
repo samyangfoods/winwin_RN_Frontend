@@ -16,5 +16,5 @@ export const useReturnBagList = async (token) => {
     headers: { authorization: `Bearer ${token}` },
   })
 
-  return data.myReturnBags
+  return data.returnbags
 }

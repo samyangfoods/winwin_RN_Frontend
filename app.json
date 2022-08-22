@@ -4,7 +4,6 @@
     "icon": "./src/assets/logoSquare.png",
     "version": "1.0.0",
     "slug": "winwin-slug",
-    "plugins": ["expo-community-flipper"],
     "android": {
       "package": "com.ggong.winwin",
       "versionCode": 1

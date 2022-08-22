@@ -24,14 +24,11 @@ export default function ReturnList({ navigation }) {
     const getReturnBagByUser = async () => {
       const response = await useReturnBagList(userInfo.token)
 
-      setReturnBag(response)
+      setReturnBagList(response)
     }
 
     getReturnBagByUser()
   }, [returnData])
-
-  console.log('ReturnBagList', returnBagList)
-  console.log('ReturnBaglist.length', returnBagList.length)
 
   return (
     <MainContainer
@@ -44,7 +41,7 @@ export default function ReturnList({ navigation }) {
       {returnBagList.length != 0 ? (
         <OARScrollView>
           {returnBagList.map((item, index) => (
-            <ReturnListItem item={item} key={index} />
+            <ReturnListItem userInfo={userInfo} item={item} key={index} />
           ))}
         </OARScrollView>
       ) : (

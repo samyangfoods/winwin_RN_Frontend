@@ -12,12 +12,13 @@ import {
 import { Image } from '../styles/profiles/UserProfile'
 
 const ReturnListItem = ({ item, userInfo, navigation }) => {
+  console.log('아이템', item)
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('주문확인', {
-          orderInfo: item ? item : null,
-          orderData: [JSON.parse(item?.orderDetail)],
+        navigation.navigate('반품확인', {
+          returnBagInfo: item ? item : null,
+          returnbagData: [JSON.parse(item)],
         })
       }}
     >
@@ -39,26 +40,26 @@ const ReturnListItem = ({ item, userInfo, navigation }) => {
 
         <OARContentsContainer>
           <OARComponentsContainer>
-            <Text style={{ fontSize: 13 }}>22년8월</Text>
+            <Text style={{ fontSize: 13 }}>{item.yearMonth}</Text>
           </OARComponentsContainer>
           <OARComponentsContainer>
-            <Text>1번마대</Text>
+            <Text>{item.gunnyNumber}</Text>
           </OARComponentsContainer>
           <OARComponentsContainer>
-            <Text>101 EA</Text>
+            <Text>{item.totalQty}개</Text>
           </OARComponentsContainer>
           <OARComponentsContainer>
-            <Text>234,134 원</Text>
+            <Text>{item.totalValue}원</Text>
           </OARComponentsContainer>
         </OARContentsContainer>
 
-        {/* <OARUserInfoContainer>
+        <OARUserInfoContainer>
           <Image
             source={{ uri: imageW140 + userInfo.userImage }}
             style={{ width: 36, height: 36 }}
           />
           <Text style={{ padding: 10 }}>{userInfo.storeName}</Text>
-        </OARUserInfoContainer> */}
+        </OARUserInfoContainer>
       </OARContainer>
     </TouchableOpacity>
   )
