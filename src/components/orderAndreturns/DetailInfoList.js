@@ -11,7 +11,7 @@ const DetailInfoList = ({ orderData, totalPrice, totalQuantity }) => {
     <>
       <HorizontalDiv style={styles.lineContainer}>
         <View style={styles.headerContainer}>
-          <Text style={[styles.headerStyle, { flex: 3 }]}>제품명</Text>
+          <Text style={[styles.headerStyle, { flex: 2 }]}>제품명</Text>
           <Text style={[styles.headerStyle, { flex: 1 }]}>수량</Text>
           <Text style={[styles.headerStyle, { flex: 1 }]}>가격</Text>
         </View>
@@ -21,7 +21,10 @@ const DetailInfoList = ({ orderData, totalPrice, totalQuantity }) => {
         orderData.map((data, index) => (
           <View
             key={index}
-            style={{ justifyContent: "center", alignItems: "center" }}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <View style={styles.rowContainer}>
               <Text style={styles.rowMiddle}>{data.product_name}</Text>
@@ -81,12 +84,9 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: "row",
-    marginTop: 2,
-    alignItems: "center",
     width: 340,
     borderBottomWidth: 0.3,
-    height: 30,
   },
   row: { flex: 1, textAlign: "center" },
-  rowMiddle: { flex: 3, marginLeft: 40 },
+  rowMiddle: { flex: 2, marginLeft: 10 },
 });
