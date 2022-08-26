@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from "react";
 import {
   View,
   Text,
@@ -6,69 +6,69 @@ import {
   StyleSheet,
   Animated,
   KeyboardAvoidingView,
-} from 'react-native'
+} from "react-native";
 
 export default function ReturnItem({
   item: { product_sapcode, product_returnName, product_returnPrice },
   changeReturnValue,
 }) {
-  const [isFocused, setIsFocused] = useState(false)
+  const [isFocused, setIsFocused] = useState(false);
 
-  const [product_returnCount, setProduct_returnCount] = useState('')
+  const [product_returnCount, setProduct_returnCount] = useState("");
 
   const onChangeCount = (e) => {
-    const { text } = e.nativeEvent
-    setProduct_returnCount(text)
-  }
+    const { text } = e.nativeEvent;
+    setProduct_returnCount(text);
+  };
 
   useEffect(() => {
-    changeReturnValue(product_sapcode, parseInt(product_returnCount))
-  }, [product_returnCount])
+    changeReturnValue(product_sapcode, parseInt(product_returnCount));
+  }, [product_returnCount]);
 
-  const moveText = useRef(new Animated.Value(0)).current
+  const moveText = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    if (product_returnCount !== '') {
-      moveTextTop()
-      setIsFocused(true)
-    } else if (product_returnCount === '') {
-      moveTextBottom()
-      setIsFocused(false)
+    if (product_returnCount !== "") {
+      moveTextTop();
+      setIsFocused(true);
+    } else if (product_returnCount === "") {
+      moveTextBottom();
+      setIsFocused(false);
     }
-  }, [product_returnCount])
+  }, [product_returnCount]);
 
   const onFocusHandler = () => {
-    if (product_returnCount !== '') {
-      moveTextTop()
+    if (product_returnCount !== "") {
+      moveTextTop();
     }
-  }
+  };
 
   const onBlurHandler = () => {
-    if (product_returnCount === '') {
-      moveTextBottom()
+    if (product_returnCount === "") {
+      moveTextBottom();
     }
-  }
+  };
 
   const moveTextTop = () => {
     Animated.timing(moveText, {
       toValue: 1,
       duration: 200,
       useNativeDriver: true,
-    }).start()
-  }
+    }).start();
+  };
 
   const moveTextBottom = () => {
     Animated.timing(moveText, {
       toValue: 0,
       duration: 200,
       useNativeDriver: true,
-    }).start()
-  }
+    }).start();
+  };
 
   const yVal = moveText.interpolate({
     inputRange: [0, 1],
     outputRange: [4, -22],
-  })
+  });
 
   const animStyle = {
     transform: [
@@ -76,16 +76,16 @@ export default function ReturnItem({
         translateY: yVal,
       },
     ],
-  }
+  };
 
   const activeLabelStyle = {
-    color: !isFocused ? '#aaa' : '#006aff',
+    color: !isFocused ? "#aaa" : "#006aff",
     fontSize: !isFocused ? 14 : 12,
-  }
+  };
 
   const activeInputStyle = {
-    borderColor: !isFocused ? '#aaa' : '#ff7d0d',
-  }
+    borderColor: !isFocused ? "#aaa" : "#ff7d0d",
+  };
 
   // '#ff7d0d'
 
@@ -95,27 +95,27 @@ export default function ReturnItem({
         <Text
           style={[styles.label, activeLabelStyle]}
           numberOfLines={1}
-          ellipsizeMode='tail'
+          ellipsizeMode="tail"
         >
           {product_returnName}
         </Text>
       </Animated.View>
       <TextInput
         style={[styles.input, activeInputStyle]}
-        autoCapitalize={'none'}
+        autoCapitalize={"none"}
         value={product_returnCount}
         onChange={onChangeCount}
         editable={true}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
         blurOnSubmit
-        keyboardType='numeric'
+        keyboardType="numeric"
       />
     </View>
-  )
+  );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: { marginTop: 10 },
   input: {
     width: 100,
@@ -123,14 +123,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 10,
     fontSize: 15,
-    color: '#006aff',
+    color: "#006aff",
     borderWidth: 2,
     borderRadius: 10,
     zIndex: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   label: {
-    color: 'grey',
+    color: "grey",
     fontSize: 12,
     width: 99,
     marginLeft: 1,
@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
   animatedStyle: {
     top: 25,
     left: 15,
-    position: 'absolute',
+    position: "absolute",
     borderRadius: 90,
     zIndex: 1,
   },
-})
+});
